@@ -1,0 +1,40 @@
+{
+  "node": "LOCAL_OS",
+  "owner": "vapashko",
+  "priority": "0",
+  "processingType": "TASK",
+  "serverNodeType": "LINUX",
+  "tags": 
+  [
+    "UC_OBJ",
+    "UC_OBJ_OLD"
+  ],
+  "taskType": "SH",
+  "customFieldValues": {
+  },
+  "processingCommand": {
+    "script": "response=$(curl -iX POST --insecure \\n  \"${SERVER}/automatenow/api/tag/create\" \\n    --header \"Accept: application/json\" \\n    --header \"Authorization: Bearer ${AC_TOK}\" \\n    --header \"Domain: ${domain}\" \\n    --data \"id=${UC_NAME}\" \\n    --data \"textColor=#FFFFFF\" \\n    --data \"backgroundColor=#008000\" 2>&1)
+
+  status_code=$(echo $response  | grep '\"status\":' |  sed 's/\\(.*\\)\"status\":\\(.\\),\"\\(.*\\)/\\2/')
+  if [ \"${status_code}\" = \"0\" ]; then
+    echo \"---------Create tag: ${UC_NAME} in domain: ${domain} is SUCCEDED---------\"
+  else
+    echo \"---------Create tag: ${UC_NAME} in domain: ${domain} is FAILED---------\"
+    exit 1
+  fi"
+  },
+  "designParameters": 
+  [
+    {
+      "defaultValue": "eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQUFBQUFBSlZTTzA4Y01SQ2VXMEJFaVJBQmlVZ1VvUUtxNEpPUzhxcmprU2pTOGxBdTF4QXB5SGg5RzRQWDN0aXp1YU1oMTFFaThaQ1E2RlBsbjZUS0Q2Q0toR2lvYVRPK0EvWklnK0xPTTk5ODN6ZVBuOWN3NGgwc0NKc3haVnJLS0pRSlI4NjRzVzNtcFNpY3dqM1drS0xwcFZ1V3lKWDJQN3Avdm8rZFhGMUdBQjBIYjFJWGdpelhSYW9NODdsVEpyMnZMS2dzNlpleGR6MWdJSUwrcTBSUWlTRlNDY0prdk1PLzhhcm1KcTJ1Yis5SWdUWGlmbTFkZXN2WWNqeVRiZXQyUzFmQ092bEFvS1NPNWlNWTNZUUpMb1F0REs1WnM5TEpsWlBKSmp3dlk3RVZ1eUUwSlNnakRTcXUvU0IwVkJxK3JXVVN3ek5lNEJkTHFrcDZoUEcrMlFLVnJqWWsxbUo0a25QdnlkMC9uVFF3V0EvNVlOTlFCMTloSDBZNmVZVWV6WDB1UUZuZ1lVdFdhK3BhV2VObm15YXppV3FwSUU3ODNaZEh2dy9QdTgzK3ZGODlYbFBHcHhlaCsrdnp6VXh2MEJXQjhHTEFlZ21yZFhKeU0xRXlmM1F5S0YrY2JSeWZYaDk4R2lMbGdIajcvL3VZcmQ5T2JtL0paamwzSE8zQWpvaTJQUnd1Z2NnWEh5ZS8yd0pkcE1weUxlbWlEQjNzdlVSSlRPME9PNnZ2NW8zdzlNTjZ2TEpWWDE1OXZ4YStZL1VrbzJ2MzJETVVVSk4vQVkyYTVFRU1Bd0FBIiwic3ViIjoiQWRtaW5pc3RyYXRvciIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiQU5PVzo6N2YzNTMyNWUtZTZlMi00MmVlLThhNTAtZTI0MThiMDdlZjJhIiwiZXhwIjoxNzA5NzE3MDM2LCJpYXQiOjE3MDk3MTM0MzZ9.DmXo2JndB7_IJDvb41AIRv6O0InDwXbrzCzPv3kVPts",
+      "editorType": "TEXT",
+      "name": "ACTOK",
+      "title": "ACTOK"
+    },
+    {
+      "editorType": "TEXT",
+      "name": "UC_NAME",
+      "title": "UC_NAME"
+    }
+  ]
+}
